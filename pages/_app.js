@@ -85,7 +85,7 @@ const MyApp = ({ Component, pageProps }) => {
   );
 };
 
-MyApp.getServerSideProps = async (appContext) => {
+MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const { ctx, router } = appContext;
   const { req, res, store } = ctx;
@@ -121,7 +121,7 @@ MyApp.getServerSideProps = async (appContext) => {
       }
     }
   }
-  const appProps = await App.getServerSideProps(appContext);
+  const appProps = await App.getInitialProps(appContext);
   return {
     pageProps: {
       ...appProps.pageProps,
