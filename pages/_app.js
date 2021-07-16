@@ -15,7 +15,7 @@ import { detectLang, detectCurrency } from "../lib/analyser";
 import { isRtl } from "../lib/isRtl";
 import { isServer } from "../lib/isServer";
 import axiosClient from "./../lib/api/axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { SUCCE_LOGIN, updateLang, updateCurrency } from "../appConfigSlice";
