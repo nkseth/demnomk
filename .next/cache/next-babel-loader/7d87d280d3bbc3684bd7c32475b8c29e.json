@@ -1,0 +1,1 @@
+{"ast":null,"code":"import axiosClient from \"../axios\";\nexport const client_fetchTrackingDetail = async code => {\n  const axios = axiosClient.getAxios();\n  const result = await axios.get(`/Home/GetOrderWithCode`, {\n    params: {\n      trackingCode: code\n    }\n  });\n  return result.data;\n};","map":null,"metadata":{},"sourceType":"module"}

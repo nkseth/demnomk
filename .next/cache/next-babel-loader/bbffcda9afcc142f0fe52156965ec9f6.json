@@ -1,0 +1,1 @@
+{"ast":null,"code":"import GoodItem from './GoodItem';\nexport default GoodItem;","map":null,"metadata":{},"sourceType":"module"}

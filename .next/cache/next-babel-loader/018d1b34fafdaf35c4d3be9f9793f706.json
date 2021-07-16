@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var TRANSACTIONTYPE_Purchase = 10;\nexport var TRANSACTIONTYPE_Cash = 20;\nexport var TRANSACTIONTYPE_Gift = 30;\nexport var TRANSACTIONTYPE_Refund = 91;","map":null,"metadata":{},"sourceType":"module"}

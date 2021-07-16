@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var SHIPPING = 1;\nexport var PAYMENT = 2;\nexport var ORDERPLACED = 3;\nexport var MAXSTEP = 3;\nexport var NEXT = \"NEXT\";\nexport var PREV = \"PREV\";\nexport var COMPLETE_AND_NEXT = \"COMPLETE_AND_NEXT\";","map":null,"metadata":{},"sourceType":"module"}

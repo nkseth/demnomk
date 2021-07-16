@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default as ItemDetail } from './ItemDetail/ItemDetail';\nexport { GoodDetailTabs } from './GoodDetailTabs';\nexport { default as DeliveryPanel } from './DeliveryPanel/DeliveryPanel';\nexport { default as GoodDetailAside } from './GoodDetailAside/GoodDetailAside';","map":null,"metadata":{},"sourceType":"module"}

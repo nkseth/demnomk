@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const SHIPPING = 1;\nexport const PAYMENT = 2;\nexport const ORDERPLACED = 3;\nexport const MAXSTEP = 3;\nexport const NEXT = \"NEXT\";\nexport const PREV = \"PREV\";\nexport const COMPLETE_AND_NEXT = \"COMPLETE_AND_NEXT\";","map":null,"metadata":{},"sourceType":"module"}

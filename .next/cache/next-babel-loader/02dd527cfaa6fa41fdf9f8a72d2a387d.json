@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var CATEGOR_LIST = 1;\nexport var PRODUCT_LIST = 2;\nexport var ADV1 = 3;\nexport var ADV2 = 4;\nexport var ADV3 = 5;\nexport var ADV4 = 6;\nexport var ADV6 = 7;\nexport var SLIDER = 8;","map":null,"metadata":{},"sourceType":"module"}
