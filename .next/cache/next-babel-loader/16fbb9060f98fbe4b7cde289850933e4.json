@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nvar HomeSliderLoader = function HomeSliderLoader() {\n  return __jsx(\"div\", {\n    style: {\n      backgroundColor: \"#ecececee\"\n    },\n    className: \"homeSlider ssc-square homeSliderLoader\"\n  });\n};\n\nexport default HomeSliderLoader;","map":null,"metadata":{},"sourceType":"module"}

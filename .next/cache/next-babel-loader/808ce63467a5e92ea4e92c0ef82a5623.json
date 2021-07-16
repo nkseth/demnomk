@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var isRtl = function isRtl(lang) {\n  switch (lang) {\n    case \"en\":\n      return false;\n      break;\n\n    case \"ar\":\n      return true;\n      break;\n\n    case \"fa\":\n      return true;\n      break;\n\n    default:\n      break;\n  }\n};","map":null,"metadata":{},"sourceType":"module"}

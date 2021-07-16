@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nconst FormErrorMsg = ({\n  show,\n  msg,\n  style\n}) => {\n  if (!show) return null;\n  return __jsx(\"p\", {\n    className: \"form-err\",\n    style: style\n  }, msg);\n};\n\nexport default FormErrorMsg;","map":null,"metadata":{},"sourceType":"module"}

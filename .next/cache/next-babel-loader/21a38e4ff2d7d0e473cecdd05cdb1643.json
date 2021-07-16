@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const isServer = () => {\n  if (true) return true;\n  return false;\n};","map":null,"metadata":{},"sourceType":"module"}

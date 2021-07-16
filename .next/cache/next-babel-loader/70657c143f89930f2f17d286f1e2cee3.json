@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { isRtl } from \"./isRtl\";\nexport var getToastConfig = function getToastConfig() {\n  return {\n    position: \"top-right\",\n    autoClose: 10000,\n    hideProgressBar: true,\n    closeOnClick: true,\n    pauseOnHover: true,\n    draggable: true,\n    progress: undefined\n  };\n};","map":null,"metadata":{},"sourceType":"module"}

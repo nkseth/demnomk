@@ -1,1 +1,0 @@
-{"ast":null,"code":"import axiosClient from \"../axios\";\nexport const client_areaCheck = async (lat, lng) => {\n  const axios = axiosClient.getAxios();\n  const result = await axios.get(`UserActivity/CheckAddressArea`, {\n    params: {\n      lat,\n      long: lng\n    }\n  });\n  return result.data;\n};","map":null,"metadata":{},"sourceType":"module"}

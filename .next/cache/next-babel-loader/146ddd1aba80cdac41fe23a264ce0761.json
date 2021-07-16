@@ -1,1 +1,0 @@
-{"ast":null,"code":"import axiosClient from \"../axios\";\nexport const client_fetchCategory = async CategoryId => {\n  const axios = axiosClient.getAxios();\n  const result = await axios.get(`/Home/Category/${CategoryId}`);\n  return result.data;\n};","map":null,"metadata":{},"sourceType":"module"}

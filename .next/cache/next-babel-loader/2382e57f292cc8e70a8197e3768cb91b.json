@@ -1,1 +1,0 @@
-{"ast":null,"code":"import axiosClient from \"../axios\";\nexport const client_fetchProvider = async (filters, providerName) => {\n  const axios = axiosClient.getAxios();\n  const result = await axios.post(`/Home/ShopGoods/${providerName}`, filters);\n  return result.data;\n};","map":null,"metadata":{},"sourceType":"module"}

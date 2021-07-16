@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const CATEGOR_LIST = 1;\nexport const PRODUCT_LIST = 2;\nexport const ADV1 = 3;\nexport const ADV2 = 4;\nexport const ADV3 = 5;\nexport const ADV4 = 6;\nexport const ADV6 = 7;\nexport const SLIDER = 8;","map":null,"metadata":{},"sourceType":"module"}

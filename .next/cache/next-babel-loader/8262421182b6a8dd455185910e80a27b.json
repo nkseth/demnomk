@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const detectLang = param => {\n  const lang = param === null || param === void 0 ? void 0 : param.split('-')[1];\n  return lang;\n};\nexport const detectCurrency = param => {\n  const currency = param === null || param === void 0 ? void 0 : param.split('-')[0];\n  return currency;\n};","map":null,"metadata":{},"sourceType":"module"}
