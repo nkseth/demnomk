@@ -446,7 +446,8 @@ export default (props) => {
                     <div className="auth__captcha-cnt">
                       <ReCAPTCHA
                         // size="compact"
-                        sitekey="6Lfh-usZAAAAAP3ZYWqEZ4hmjWOi_GA606Ho19aW"
+                        //sitekey="6Lfh-usZAAAAAP3ZYWqEZ4hmjWOi_GA606Ho19aW"
+                        sitekey="6LdygaAbAAAAALNz6ISBIREkVHadOEIakxzAPgSD"
                         onChange={(token) => {
                           setcaptchaToken(token);
                         }}
