@@ -17,7 +17,7 @@ import { validatePhoneNumber } from "../../../../../../lib/formValidator";
 const ChangePhone = ({ handleSituation, currdata, setData }) => {
   const [errors, setErrors] = useState({});
   const [mobile, setMobile] = useState("");
-  const lang = useSelector(selectLang);
+  const lang = useSelector(sLang);
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const handleSubmit = async () => {

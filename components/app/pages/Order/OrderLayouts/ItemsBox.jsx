@@ -25,7 +25,7 @@ export default ({ count, items }) => {
   return (
     <BoxStyle1 className="payment__items-cnt" headerContent={renderBoxHeader()}>
       <div className="payment__items">
-        {items.map((item) => {
+        {items?.map((item) => {
           return <CartAndWishlistItem key={item.itemId} {...item} withoutRight/>;
         })}
         {/* <GoodItemRow

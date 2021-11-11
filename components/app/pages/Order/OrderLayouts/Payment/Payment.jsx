@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import {
   BoxStyle2,
@@ -9,7 +9,7 @@ import {
 import PaymentAside from "./PaymentAside";
 import { Translate } from "react-localize-redux";
 import { useState } from "react";
-
+import { selectCurr } from "../../../../../../appConfigSlice";
 import ItemsBox from "../ItemsBox";
 import { orderContext } from "../../OrderContext";
 import {
@@ -34,6 +34,7 @@ import {
   validateCreditCard,
   validatePostalCode,
 } from "../../../../../../lib/formValidator";
+import Shipingprovider from "./slelectdeliver";
 const Payment = () => {
   const [checked, setChecked] = useState(false);
   const [payment, setPayment] = useState(null);
@@ -48,8 +49,12 @@ const Payment = () => {
   const [cardYear, setCardYear] = useState(null);
   const [cardSecurity, setCardSecurity] = useState(null);
   const [cardZip, setCardZip] = useState(null);
-
+  const [ppk,setppk]=useState({});
+  const [diliverysettings,setdiliverysettings] = useState({})
+  const [asideloading,setasideloading]=useState(false)
+  const curr = useSelector(selectCurr);
   const lang = useSelector(selectLang);
+  const ggk=useRef()
   const coupon = Cookies.get(
     process.env.NEXT_PUBLIC_Token_Cookie_name_coupon
   );
@@ -122,7 +127,9 @@ const Payment = () => {
   };
 
   const handlePlaceOrderClick = async (e) => {
-    e.preventDefault();
+
+   e.preventDefault();
+   
     if (!cartTypeId) {
       toast.error(getErrorMsg(lang, "select-payment"), getToastConfig());
       return;
@@ -138,27 +145,50 @@ const Payment = () => {
       }
     }
 
+
+
     setPlaceOrderLoading(true);
     try {
-      const result = await client_getPaymentPageUrl(parseInt(cartTypeId.value) , cardName , cardNumber , cardMonth , cardYear , cardSecurity , cardZip  , coupon);
-     
-      if (result.status == "200") {
-        window.location.href = result.result ;
+      const result = await client_getPaymentPageUrl(parseInt(cartTypeId.value) , cardName , cardNumber , cardMonth , cardYear , cardSecurity , cardZip  , coupon)
+   
+      let rri=result.result.split('+')
+      if(rri.length>1){
+        console.log(rri)
+        let ffi=JSON.parse(rri[0])
+         ffi={...ffi,redirect:window.location.href}
+        setppk(ffi)
+       ggk.current.submit()
       }
-      setPlaceOrderLoading(false);
+      else{
+        window.location.href = result.result 
+      }
+    setPlaceOrderLoading(false);
     } catch (err) {
-      if (err.response.data.result?.errorText) {
-        toast.error(err.response.data.result?.errorText, getToastConfig());
-      } else toast.error(err.response.data.message, getToastConfig());
+      console.log(err)
+      if (err.response?.data.result?.errorText) {
+      
+        toast.error(err.response?.data.result?.errorText, getToastConfig());
+      } else toast.error(err.response?.data.message, getToastConfig());
       setPlaceOrderLoading(false);
     }
-
+  
   };
+
+  const shippingchange=(res)=>{
+    console.log("changedvalue",res)
+    setasideloading(false)
+  if(res.data.result) setPayment(res?.data.result)
+    
+}
+const setasideloading1=()=>{
+  setasideloading(true)
+}
+
 
   return (
     <div className="row payment no-gutters">
       <section className="col-xl-9 col-lg-8 col-12 order-md-1 order-2">
-        <form className="mt-4" onSubmit={handlePlaceOrderClick}>
+        <form className="mt-4" onSubmit={handlePlaceOrderClick} >
           <BoxStyle2
             headerContent={
               <h2 className="payment__box-header">
@@ -175,9 +205,10 @@ const Payment = () => {
                 onChange={onCartTypeChange}
               />
             </div>
+            <Shipingprovider shippingchange={shippingchange} setasideloading={setasideloading1}/>
 
             {/* برای کردیمکس هست فقط */}
-            {cartTypeId?.value === 2 ? (
+            {/*cartTypeId?.value === 2 ? (
               <div className="payment-method__container mt-4">
                 <div className="payment__payment-method">
                   <Translate>
@@ -428,8 +459,40 @@ const Payment = () => {
                 </Translate>
               </div>
             </div>
-            )}
+            )*/}
 
+<div className="payment-method__container mt-4">
+              <div className="payment__payment-method p-4">
+                <Translate>
+                  {({ translate }) => {
+                    return (
+                      <>
+                        <div className="row">
+                            
+                            <div className="col-12">
+                            <Translate id="payment-method.redirectToPyamnetPage" />
+                            </div>
+
+                        </div>
+                       
+                      </>
+                    );
+                  }}
+                </Translate>
+              </div>
+            </div>
+  <form action={`https://webdemo.webtreeonline.com/ajyal-payment/`} style={{display: 'none'}} ref={ggk}  method="POST"  >
+
+                  <input name="PaymentType" value={ppk?.PaymentType}/>
+                  <input name="PaymentId" value={ppk?.PaymentId}/>
+                  <input name="OrderId" value={ppk?.OrderId}/>
+                  <input name="CurrencyId" value={ppk?.CurrencyId}/>
+                  <input name="total" value={ppk?.total}/>
+                  <input name="userid" value={ppk?.cusomerid}/>
+                  <input name="redirect" value={ppk?.redirect}/>
+                {/*<input name="FkShippingMethodId" value={diliverysettings?.id}/>
+                <input name="ShippingCost"  value={diliverysettings?.totalAmount}/>*/}
+  </form>
             {/* <div className="gray-box d-flex p-4 mt-4">
             <Switch
               onChange={handleChange}
@@ -537,7 +600,7 @@ const Payment = () => {
         </form>
       </section>
       <aside className="col-xl-3 col-lg-4 col-12 order-md-2 order-1">
-        <PaymentAside data={payment} />
+        <PaymentAside data={payment} loading={asideloading} />
       </aside>
     </div>
   );

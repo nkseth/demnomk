@@ -16,6 +16,7 @@ import { orderContext } from "../../OrderContext";
 import SelectAddress from "./SelectAddress";
 import AddressDetails from "./AddressDetails";
 import AddressesList from "./AddressesList";
+
 import {
   client_addAddress,
   client_updateAddress,
@@ -42,6 +43,7 @@ export default class ShippingAddress extends React.Component {
         mobileNumber: null,
         lat: null,
         lng: null,
+        shipingproviderid: null,
       },
     };
 
@@ -155,11 +157,14 @@ export default class ShippingAddress extends React.Component {
     switch (situation) {
       case COMPLETE:
         content = (
+        
           <AddressesList
             setData={this.setData}
             handleSituation={this.handleSituation}
             handleOrderStep={this.props.handleOrderStep}
           />
+         
+         
         );
         break;
       case VERIFY_PHONE:

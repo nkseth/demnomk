@@ -32,6 +32,7 @@ import { isRtl } from "../../../../lib/isRtl";
 import { getToastConfig } from "../../../../lib/toast";
 import { withRouter } from "next/router";
 
+import { selectCart} from "../CartAndWishlist/cartAndWishlistSlice";
 class Order extends React.Component {
   constructor(props) {
     super(props);
@@ -137,8 +138,19 @@ class Order extends React.Component {
     //       }
     //     );
     //   }, 2000);
+    console.log(this.props)
   }
+
+  chngingstate(token){
+    this.setState({...this.state,shippingprovider:token})
+    
+  }
+
   render() {
+
+  
+{console.log(this.state)}
+
     const step = this.state.step;
     let content;
     switch (step) {
@@ -154,6 +166,8 @@ class Order extends React.Component {
       default:
         break;
     }
+
+   
 
     return (
       <main className="order-re container siteWidthContainer">
@@ -207,6 +221,7 @@ class Order extends React.Component {
 const mapStateToProps = (state) => {
   return {
     lang: selectLang(state),
+    cart: selectCart(state)
   };
 };
 

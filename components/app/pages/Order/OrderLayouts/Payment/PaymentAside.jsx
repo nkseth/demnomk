@@ -5,11 +5,23 @@ import ShipTo from "../ShipTo";
 import { useSelector } from "react-redux";
 import { selectCurr } from "../../../../../../appConfigSlice";
 import { formatMoney } from "../../../../../../lib/helpers";
-
-const PaymentAside = ({ data }) => {
+import {Loading} from '../../../../../common'
+const PaymentAside = ({ data,loading }) => {
   const curr = useSelector(selectCurr);
+  if(loading){
+   return ( <div className="row payment no-gutters">
+             <Loading
+        type="gray"
+        styleSheet={{ margin: "80px auto" }}
+        width="60px"
+        height="60px"
+      />
+    </div>)
+    
+  }
+ 
   return (
-    <div className="payment__order-sum pl-3 rtl-pl-0 rtl-pr-3">
+   <div className="payment__order-sum pl-3 rtl-pl-0 rtl-pr-3">
       <BoxStyle2 className="payment__aside ">
         <div className="cart-aside__cnt">
           <div className="cart-aside__top-cnt">

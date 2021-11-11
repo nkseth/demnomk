@@ -34,10 +34,8 @@ const reducer = (state, action) => {
       nextState.appConfig.login.prevLink = state.appConfig.login.prevLink;
     }
 
-
-
-    nextState.cart_wishlist.cartCount = state.cart_wishlist.cartCount;
-    nextState.cart_wishlist.wishCount = state.cart_wishlist.wishCount;
+   // nextState.cart_wishlist.cartCount = state.cart_wishlist.cartCount;
+    //nextState.cart_wishlist.wishCount = state.cart_wishlist.wishCount;
 
     return nextState;
   } else {

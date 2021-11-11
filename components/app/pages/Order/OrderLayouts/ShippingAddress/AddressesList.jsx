@@ -22,6 +22,7 @@ import {
   client_getAddresses,
   client_deleteAddress,
   client_changeDestination,
+  client_getAllShipMethod
 } from "../../../../../../lib/api/client/clientOrder";
 import { SELECT_ADDRESS, VERIFY_PHONE } from "./ShippingAddressConstant";
 import { getErrorMsg } from "../../../../../../lib/helpers";
@@ -35,8 +36,10 @@ import classnames from "classnames";
 import {
   client_changeMobileNumber,
   client_setDefaultAddress,
+  
 } from "../../../../../../lib/api/client/clientCommon";
 import { PhoneNumberFormat, PhoneNumberUtil } from "google-libphonenumber";
+import { orderContext } from "../../OrderContext";
 
 const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
   const [addressLoading, setAddressLoading] = useState(false);
@@ -44,7 +47,8 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [continueLoading, setContinueLoading] = useState(false);
   const [verifyLoading, setVerifyLoading] = useState(false);
-
+const [deliverymode,setdeliveryMode] = useState([])
+const [selectd,setselectd]=useState(1);
   const lang = useSelector(selectLang);
   const PNF = PhoneNumberFormat;
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -65,6 +69,20 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
 
   useEffect(() => {
     getAddresses();
+    
+    const getdilivery=async()=>{
+ const  result= await client_getAllShipMethod()
+  console.log(result);
+  setdeliveryMode(result.data.result)
+  //  .then((res)=>{
+  //   console.log("sejfsfsdfmsdfmsdmfsdmf",deliverymode,res);
+  //   setdeliveryMode(res?.result)
+  //   }).catch((err)=>{
+  //     console.log(err)
+  //   })
+     }
+    getdilivery()
+  
     return () => {};
   }, []);
 
@@ -89,6 +107,7 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
     }
   };
 
+
   const handleEdit = (adr) => {
     setData(
       {
@@ -102,6 +121,7 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
         lat: adr.locationX,
         lng: adr.locationY,
         isUpdate: true,
+        shipingproviderid:selectd
       },
       () => {
         handleSituation(SELECT_ADDRESS);
@@ -121,6 +141,7 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
         lat: null,
         lng: null,
         isUpdate: false,
+        shipingproviderid:1
       },
       () => {
         handleSituation(SELECT_ADDRESS);
@@ -135,9 +156,15 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
   };
 
   const handleContinueClick = async () => {
+    console.log(selectd)
     if (continueLoading) return;
 
-    if (!selectedAddress || selectedAddress.id === null) {
+    if (!selectedAddress || selectedAddress.id === null ) {
+      toast.error(getErrorMsg(lang, "select-address"), getToastConfig());
+      return;
+    }
+
+    if (selectd===null) {
       toast.error(getErrorMsg(lang, "select-address"), getToastConfig());
       return;
     }
@@ -231,7 +258,10 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
                         name={adr.addressId}
                         value={adr.mobileVerifed}
                       >
-                        <div className="addresses__item-cnt no-gutters justify-content-between flex-wrap returns-add-single__addresses">
+                        <div className="addresses__item-cnt no-gutters justify-content-between flex-wrap returns-add-single__addresses"
+                        
+                        >
+                         
                           {/* display on langscape phones and smaller */}
                           {/* <LandScapePhones>
                             <a
@@ -277,7 +307,7 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
                             <span className="addresses__ars-head">
                               <Translate id="common.name" />
                             </span>
-                            <span className="addresses__ars-value">
+                            <span className="addresses__ars-value" >
                               {adr.transfereeName + " " + adr.transfereeFamily}
                             </span>
                           </div>
@@ -361,6 +391,8 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
                               </a>
                             </div>
                           </LandScapePhonesAndBigger>
+                      
+
                         </div>
                       </SelectBox.SelectItem>
                     );
@@ -371,7 +403,10 @@ const AddressesList = ({ handleSituation, setData, handleOrderStep }) => {
           </section>
         )}
       </BoxStyle2>
-      <section className="order-re__btn-cnt d-flex justify-content-end mt-4 mb-4 mr-xl-0 mr-3">
+  
+                
+      <section className="order-re__btn-cnt d-flex justify-content-end mt-4 mb-4 mr-xl-0 mr-3" >
+      
         <ProtraitPhonesAndBigger>
           <button className="primary-btn" onClick={handleAddNew}>
             <Translate id="shipping.add-new-address" />

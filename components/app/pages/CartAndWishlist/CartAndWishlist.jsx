@@ -57,6 +57,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 
 class CardAndWhishlist extends React.Component {
   constructor(props) {
+
     super(props);
     this.state = {
       cartLoading: false,
@@ -254,7 +255,10 @@ class CardAndWhishlist extends React.Component {
   };
 
   handleCheckOutClick = async () => {
+    console.log(this.props)
     if (!this.props.isLogin) {
+
+      console.log(this.props.isLogin)
       this.props.prevUrlChange(this.props.router.asPath);
       this.props.router.push(`/${this.props.curr}-${this.props.lang}/Auth`);
       return;
@@ -266,7 +270,9 @@ class CardAndWhishlist extends React.Component {
     if (downloadAbleItem.length == this.props.cart.items.length) {
       digitalFile = true;
     }
+
     if (digitalFile) {
+    
       this.props.router.push(
         `/${this.props.curr}-${this.props.lang}/order?to=downloadable`
       );
@@ -460,31 +466,7 @@ class CardAndWhishlist extends React.Component {
                     &nbsp; {formatMoney(this.props.cart.total)}
                   </span>
                 </div> */}
-                <Button
-                  radius="true"
-                  onClick={() => {
-                    this.setState({ mobileCheckoutLoading: true });
-                    this.handleCheckOutClick();
-                  }}
-                  value={
-                    this.state.mobileCheckoutLoading ? (
-                      <Loading type="white" with="20px" height="20px" />
-                    ) : (
-                      <>
-                        <Translate id="aside.buy" />
-                        &nbsp;
-                        {this.props.cart?.itemsCount}
-                        &nbsp;
-                        <Translate id="aside.items" />
-                        &nbsp;
-                        <span>
-                          <Translate id={this.props.curr} />
-                          &nbsp; {formatMoney(this.props.cart.total)}
-                        </span>
-                      </>
-                    )
-                  }
-                />
+           
               </div>
             </div>
           )}
